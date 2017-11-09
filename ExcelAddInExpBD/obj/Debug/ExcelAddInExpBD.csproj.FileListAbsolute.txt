@@ -29,6 +29,5 @@ C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInEx
 C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInExpBD\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInExpBD\bin\Debug\EntityFramework.xml
 C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInExpBD\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInExpBD\obj\Debug\ExcelAddInExpBD.csprojResolveAssemblyReference.cache
 C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInExpBD\bin\Debug\AppData\SkyNetExo.mdf
 C:\Users\SB13\documents\visual studio 2015\Projects\ExcelAddInExpBD\ExcelAddInExpBD\bin\Debug\AppData\SkyNetExo_log.ldf

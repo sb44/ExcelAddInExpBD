@@ -8,11 +8,11 @@ using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
 using Microsoft.Win32;
 
-namespace ExcelAddInExpBD
-{
+namespace ExcelAddInExpBD {
     // Cette classe contient logique de présentation.
-    public partial class ThisAddIn
-    {
+    public partial class ThisAddIn {
+        public static string NameOfAddin = "ExcelAddInExpBD";
+
         public PRES.UserControlFMSkyNet myUserControlFromFM;
 
         private Microsoft.Office.Tools.CustomTaskPane myCustomTaskPaneSkyNet; // https://msdn.microsoft.com/en-ca/library/bb772076.aspx https://msdn.microsoft.com/en-ca/library/bb384311.aspx //UserControl2.cs //UserControl1.xaml //// ajouter WPF Usercontrol type WPF, faire du drag and drop avec les outils, générer projet, ajouter usercontrol windows forms, mettre le code pour le taskpane, drag and drop de usercontrol wpf à usercontrol windowsforms
@@ -20,16 +20,26 @@ namespace ExcelAddInExpBD
             get {
                 if (myCustomTaskPaneSkyNet == null) // chargement de l'utilitaire si requis.
                     this.initSkyNetTP();
-                
-                    return myCustomTaskPaneSkyNet;
+
+                return myCustomTaskPaneSkyNet;
             }
         }
 
         private int wpfPaneWidth = 780;
         private int wpfPaneHeight = 525;
 
-        private void ThisAddIn_Startup(object sender, System.EventArgs e)
-        {
+        // Cette méthode va appeler : ThisAddIn_Shutdown
+        internal void QuitAddIn() {
+            Microsoft.Office.Core.COMAddIns adds = Globals.ThisAddIn.Application.COMAddIns;
+            foreach (Microsoft.Office.Core.COMAddIn addIn in adds) {
+                if (addIn.ProgId == ThisAddIn.NameOfAddin && addIn.Connect) {   // ThisAddIn.NameOfAddin => static string manually definned in ThisAddin cl
+                    addIn.Connect = false;
+                    break;
+                }
+            }
+        }
+
+        private void ThisAddIn_Startup(object sender, System.EventArgs e) {
             initSkyNetTP(); // chargement initial de l'utilitaire
         }
 
@@ -47,7 +57,7 @@ namespace ExcelAddInExpBD
 
             myCustomTaskPaneSkyNet.DockPositionRestrict = Office.MsoCTPDockPositionRestrict.msoCTPDockPositionRestrictNoChange;
 
-           // myCustomTaskPaneSkyNet.Control.SizeChanged += new EventHandler(Control_SizeChanged);
+            // myCustomTaskPaneSkyNet.Control.SizeChanged += new EventHandler(Control_SizeChanged);
 
             myCustomTaskPaneSkyNet.Visible = true;
             myCustomTaskPaneSkyNet.VisibleChanged += new EventHandler(myCustomTaskPaneSkyNet_VisibleChanged);
@@ -58,7 +68,7 @@ namespace ExcelAddInExpBD
             Globals.Ribbons.ManageTaskPaneRibbon.toggleButtonLancer.Checked = myCustomTaskPaneSkyNet.Visible;
 
             // Retirer l'utilitaire de la mémoire si non visible.
-            if (!myCustomTaskPaneSkyNet.Visible) { 
+            if (!myCustomTaskPaneSkyNet.Visible) {
                 CustomTaskPanes.Remove(myCustomTaskPaneSkyNet);
                 myCustomTaskPaneSkyNet = null;
             }
@@ -68,8 +78,7 @@ namespace ExcelAddInExpBD
 
         }
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
-        {
+        private void ThisAddIn_Shutdown(object sender, System.EventArgs e) {
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Office\\Excel\\Addins\\ExcelAddInExpBD", true);
 
@@ -84,8 +93,7 @@ namespace ExcelAddInExpBD
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InternalStartup()
-        {
+        private void InternalStartup() {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
@@ -115,5 +123,5 @@ namespace ExcelAddInExpBD
         //        Globals.ThisAddIn.Application.Cursor = Microsoft.Office.Interop.Excel.XlMousePointer.xlDefault;
         //    }
         //}
-}
+    }
 }
