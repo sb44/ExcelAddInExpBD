@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SkyNetModelStoreContainer" CdmEntityContainer="SkyNetEntities">
+    <EntitySetMapping Name="departement">
+      <EntityTypeMapping TypeName="SkyNetModel.departement">
+        <MappingFragment StoreEntitySet="departement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employe">
+      <EntityTypeMapping TypeName="SkyNetModel.employe">
+        <MappingFragment StoreEntitySet="employe">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_departement" ColumnName="id_departement" />
+          <ScalarProperty Name="id_patron" ColumnName="id_patron" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="poste" ColumnName="poste" />
+          <ScalarProperty Name="date_embauche" ColumnName="date_embauche" />
+          <ScalarProperty Name="salaire" ColumnName="salaire" />
+          <ScalarProperty Name="commission" ColumnName="commission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
